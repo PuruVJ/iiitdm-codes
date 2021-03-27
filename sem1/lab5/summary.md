@@ -1,0 +1,3 @@
+**1.c**: Inputting integers, a number `x`, then checking if any 2 integers in the array are equal to `x` or not. Simple enough to do, but there was one problem. Duplicate pairs were being printed too (Like `(1, 4), (2, 3), (3, 2), (4, 1)`). But I got some help from you and change the inital varible in the 2nd for loop to always start after the current element of the outer for loop.
+
+**2.c**: Bubble sort in descending order, with measurements of executions(swaps and comparisons). This was the same as the one taught in class by sir, but I kept it in my mind to type the whole code myself 😋. Slight change needed was changing the comparison operator in the if statement, and adding the incrementation statements for the measurement variables. Not much difficult.

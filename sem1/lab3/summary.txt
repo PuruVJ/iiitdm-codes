@@ -1,0 +1,4 @@
+month-days.c: This program required brute force using the switch statements. I personally do not like these much, and rather prefer object factory functions(coming from JS world). But as we haven't been taught objects/classes(if C even has those), and we had to stick to switch for now, I wrote a big switch statement, and did the work in there.
+I used something a little out of what's been taught to us. I `returned` from the default case, so as to stop the execution of the print statement out of the switch statement.
+
+And that's it 🙂

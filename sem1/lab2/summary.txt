@@ -1,0 +1,13 @@
+temp-convert.c: Get temperature in fahrenheit, and convert to celsius. Formula was pretty simple, and the code was simple enough.
+
+dollar-to-rupee.c: Take value in as dollar, store in variable. Then multiply with the conversionRate variable to get the answer in rupees. I left the output in decimal only, but most people would want to keep it as integer only. Depends on the requirement.
+
+rupee-to-dollar.c: Same as the above, just divide the conversionRate rather than multiply,just inverted, and it's more sensible to leave it in decimal only.
+
+feet-to-km.c: 1 feet = 0.0003048. Same as the dollar-to-rupee.c. Just multiply the conversionRate to the lengthInFeet entered.
+
+quot-remainder.c: This looked a little hard, coming from JavaScript environment, where solving this problem is intermediate. However, it was easy in C, as variable types did all the heavy-lifting.
+
+I learnt some things, like you can't use \n in scanf. It causes your program to freeze after entering. I need to look up why it happens.
+
+The lab classes are going very well, and I enjoy these thoroughly. You rock Yasho sir 👍

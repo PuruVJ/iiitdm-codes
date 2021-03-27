@@ -1,0 +1,1 @@
+This program was simple enough. Just bubble sort, using pointers instead of array. No big deal. But I sliggtly got confused about changing the pointers. Like do you do ptr = ptr - n or *ptr = *(ptr - n) or what? So I tried these all, put printfs everywhere to see the address values, and resolved the mental block. 

@@ -1,0 +1,16 @@
+These problems were a little hard to solve than what was taught in the lab class. But I have some background in programming, so I was able to figure these out, as I had already done it in JavaScript.
+
+swap.c: I created a temp variable, and then subtracted a and b such that their values would swap. Simple enough
+
+swap-without.c: No temp variable allowed, so I just summed a and b and assigned to a, then subtracted from both variables in such a way that these would swap.
+
+fibonacci.c: At first Iw as very confused as to how to solve this problem without using loops or recursion. Though there might be a mistake from our TA(which is you, who is reading this, most probably), but then I remembered a formula to straight away calculate nth fibonacci number. So I applied it and got the answer. 
+I also learned when to use -lm flag, as pow function wasn't working.
+
+cards-1.c: Had same doubts initially as to how it could be solved without loops. My thoughts were to create a factorial function using a loop, but it wasn't allowed. Finally I looked hard, and realised that the answer was nC2, and that n * (n - 1) / 2. So I applied that, and BAM! I had the answer.
+
+cards-2.c: Same as cards-1.c, but the formula this time was nC2 - n (-n to reduce the number of adjacent exchanges).
+
+These were challenging, and I had fun doing these.
+
+And my github repo where all these code snippets are stored: https://github.com/PuruVJ/iiitdm-c-practise-sem-1

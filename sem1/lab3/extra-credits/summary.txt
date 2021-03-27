@@ -1,0 +1,5 @@
+leap-year.c: Simple enough to do. Just use the mod operator in if else statement, and print out if it's a leap year or not.
+
+a-b-compare.c: Compare two inputted values, and print out Greater, Equal or Less based on the conditions specified.
+
+grade.c: Similar to the "days in month" problem, this required lots of branching statements. As I stated before, in the mainstream summary.txt, I pretty much dislike switch statements, so I did this program with if else statements. The question stated to specify upper limits too, but I found those to be redundant, as the flow of these statements automatically discarded any possibility of inappropriate output.
