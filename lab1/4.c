@@ -1,22 +1,26 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 struct Student
 {
-  char name[100];
+  char *name;
   int age;
-  char rollNo[100];
-  char address[100];
+  char *rollNo;
+  char *address;
 };
 
 void main()
 {
   struct Student studentInfo;
 
+  studentInfo.name = (char *)malloc(100 * sizeof(char));
+  studentInfo.rollNo = (char *)malloc(100 * sizeof(char));
+  studentInfo.address = (char *)malloc(100 * sizeof(char));
+
   // Name
   printf("Enter student name: ");
   scanf("%[^\n]%*c", studentInfo.name);
-  // getchar();
 
   // Age
   printf("Enter student age: ");
@@ -26,17 +30,15 @@ void main()
   // Roll no
   printf("Enter student roll number: ");
   scanf("%[^\n]%*c", studentInfo.rollNo);
-  // getchar();
 
   // Address
   printf("Enter student address: ");
   scanf("%[^\n]%*c", studentInfo.address);
-  // getchar();
 
   // Now print this stuff
-  printf("Student name: %s\n", studentInfo.name);
+  printf("\n");
+  printf("Student name: %s\n", (studentInfo.name));
   printf("Student age: %d\n", studentInfo.age);
-  printf("Student roll no.: %s\n", studentInfo.rollNo);
-  printf("Student address: %s\n", studentInfo.address);
-  // return 0;
+  printf("Student roll no.: %s\n", (studentInfo.rollNo));
+  printf("Student address: %s\n", (studentInfo.address));
 }
