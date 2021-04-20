@@ -1,6 +1,8 @@
 {
   "files.associations": {
     "cmath": "c",
-    "*.tcc": "c"
+    "*.tcc": "c",
+    "limits": "c",
+    "type_traits": "c"
   }
 }
