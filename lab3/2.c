@@ -8,10 +8,12 @@ void printMatrix(int rank, int *matrix)
   {
     for (int j = 0; j < rank; j++)
     {
-      if (*(matrix + i * rank + j) < 10)
-        printf("0%d ", *(matrix + i * rank + j));
+      int currentElement = *(matrix + i * rank + j);
+
+      if (currentElement < 10)
+        printf("0%d ", currentElement);
       else
-        printf("%d ", *(matrix + i * rank + j));
+        printf("%d ", currentElement);
     }
     printf("\n");
   }
