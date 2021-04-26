@@ -1,14 +1,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void printMatrix(int rank, int *matrix)
+void printMatrix(int order, int *matrix)
 {
   // Print out the matrix
-  for (int i = 0; i < rank; i++)
+  for (int i = 0; i < order; i++)
   {
-    for (int j = 0; j < rank; j++)
+    for (int j = 0; j < order; j++)
     {
-      int currentElement = *(matrix + i * rank + j);
+      int currentElement = *(matrix + i * order + j);
 
       if (currentElement < 10)
         printf("0%d ", currentElement);
@@ -21,21 +21,21 @@ void printMatrix(int rank, int *matrix)
 
 void main()
 {
-  int rank;
+  int order;
 
-  printf("Enter rank of matrix: ");
-  scanf("%d", &rank);
+  printf("Enter order of matrix: ");
+  scanf("%d", &order);
 
-  int *matrix = (int *)malloc(rank * rank * sizeof(int));
+  int *matrix = (int *)malloc(order * order * sizeof(int));
 
-  for (int i = 0; i < rank; i++)
-    for (int j = i; j < rank; j++)
+  for (int i = 0; i < order; i++)
+    for (int j = i; j < order; j++)
     {
       int num = rand() % 100;
-      *(matrix + i * rank + j) = num;
-      *(matrix + j * rank + i) = num;
+      *(matrix + i * order + j) = num;
+      *(matrix + j * order + i) = num;
     }
 
   printf("\n\nGenerated symmetric matrix: \n\n");
-  printMatrix(rank, matrix);
+  printMatrix(order, matrix);
 }
