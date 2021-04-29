@@ -13,24 +13,24 @@ int arrIncludes(int val, int arr[], int n) {
 
   return 0;
 }
+void deleteNode(List **head, int index) {
+  // If linked list is empty
+  if (*head == NULL) return;
 
-void deleteNode(List **node, int index) {
   // Store head node
-  List *temp = *node;
+  List *temp = *head;
 
   // If head needs to be removed
-  if (index == 0) {  // Change head
-    *node = temp->next;
-
-    // free old head
-    free(temp);
+  if (index == 0) {
+    *head = temp->next;  // Change head
+    free(temp);          // free old head
     return;
   }
 
   // Find previous node of the node to be deleted
   for (int i = 0; temp != NULL && i < index - 1; i++) temp = temp->next;
 
-  // If position is more than number of nodes
+  // If position is more than number of nodes, do nothing
   if (temp == NULL || temp->next == NULL) return;
 
   // Node temp->next is the node to be deleted
@@ -38,11 +38,9 @@ void deleteNode(List **node, int index) {
   List *next = temp->next->next;
 
   // Unlink the node from linked list
-  // Free memory
-  free(temp->next);
+  free(temp->next);  // Free memory
 
-  // Unlink the deleted node from list
-  temp->next = next;
+  temp->next = next;  // Unlink the deleted node
 }
 
 void createList(List *node, int n) {
@@ -66,7 +64,7 @@ void createList(List *node, int n) {
   }
 }
 
-void printList(List *node, int n) {
+void printList(List *node) {
   List *temp = node;
 
   while (temp != NULL) {
@@ -76,27 +74,54 @@ void printList(List *node, int n) {
   printf("\n\n");
 }
 
-void pruneList(List *node, int n) {
-  int accountedForChars[26];
-  int arrIndex = 0;
+/* Bubble sort the given linked list */
+/* function to swap data of two nodes a and b*/
+void swap(List *a, List *b) {
+  int temp = a->character;
+  a->character = b->character;
+  b->character = temp;
+}
 
-  // Fill array with -1 values
-  for (int i = 0; i < 26; i++) accountedForChars[i] = -1;
+void bubbleSort(List *head) {
+  int swapped, i;
+  List *ptr1;
+  List *lptr = NULL;
 
-  List *temp = node;
+  /* Checking for empty list */
+  if (head == NULL) return;
 
-  while (temp != NULL) {
-    if (arrIncludes(temp->character, accountedForChars, 26))
-      deleteNode(&node, temp->character);
-    else {
-      accountedForChars[arrIndex] = temp->character;
-      arrIndex++;
+  do {
+    swapped = 0;
+    ptr1 = head;
+
+    while (ptr1->next != lptr) {
+      if (ptr1->character > ptr1->next->character) {
+        swap(ptr1, ptr1->next);
+        swapped = 1;
+      }
+      ptr1 = ptr1->next;
     }
+    lptr = ptr1;
+  } while (swapped);
+}
 
-    temp = temp->next;
+void pruneList(List *head) {
+  List *current = head;
+  List *next_next;
 
-    node->next = temp;
-    node = node->next;
+  if (current == NULL) return;
+
+  while (current->next != NULL) {
+    /* Compare current node with its next */
+    if (current->character == current->next->character) {
+      next_next = current->next->next;
+
+      free(current->next);
+
+      current->next = next_next;
+    } else {
+      current = current->next;
+    }
   }
 }
 
@@ -106,23 +131,27 @@ void main() {
   printf("Enter value for n: ");
   scanf("%d", &n);
 
-  List *list = (List *)malloc(sizeof(List));
+  List *head = (List *)malloc(sizeof(List));
 
   // Terminate if memory not allocated
-  if (list == NULL) {
+  if (head == NULL) {
     printf("Unable to allocate memory.");
     exit(0);
   }
 
   srand(time(NULL));
 
-  createList(list, n);
+  createList(head, n);
+
+  // Sort the items
+  bubbleSort(head);
 
   printf("Generated list: \n");
-  printList(list, n);
+  printList(head);
 
   printf("\n\n");
 
+  pruneList(head);
   printf("Pruned list: \n");
-  pruneList(list, n);
+  printList(head);
 }
