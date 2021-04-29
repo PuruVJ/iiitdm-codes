@@ -7,42 +7,6 @@ typedef struct _List {
   struct _List *next;
 } List;
 
-int arrIncludes(int val, int arr[], int n) {
-  for (int i = 0; i < n; i++)
-    if (arr[i] == val) return 1;
-
-  return 0;
-}
-void deleteNode(List **head, int index) {
-  // If linked list is empty
-  if (*head == NULL) return;
-
-  // Store head node
-  List *temp = *head;
-
-  // If head needs to be removed
-  if (index == 0) {
-    *head = temp->next;  // Change head
-    free(temp);          // free old head
-    return;
-  }
-
-  // Find previous node of the node to be deleted
-  for (int i = 0; temp != NULL && i < index - 1; i++) temp = temp->next;
-
-  // If position is more than number of nodes, do nothing
-  if (temp == NULL || temp->next == NULL) return;
-
-  // Node temp->next is the node to be deleted
-  // Store pointer to the next of node to be deleted
-  List *next = temp->next->next;
-
-  // Unlink the node from linked list
-  free(temp->next);  // Free memory
-
-  temp->next = next;  // Unlink the deleted node
-}
-
 void createList(List *node, int n) {
   node->character = (char)(65 + rand() % 26);
   node->next = NULL;
