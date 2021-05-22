@@ -34,7 +34,7 @@ void printList(StudentNode* head) {
   StudentNode* temp = head;
 
   while (temp != NULL) {
-    printf(" %d ", temp->rollNo);
+    printf(" %d %d marks", temp->rollNo, temp->marks);
     temp = temp->next;
   }
   printf("\n");
