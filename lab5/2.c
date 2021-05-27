@@ -13,9 +13,9 @@ List *head, *end;
 
 // function for reading elements in linked list
 void createList(int n) {
-  struct _list *node, *temp, *temp1;
+  List *node, *temp, *temp1;
 
-  head = (struct _list *)malloc(sizeof(struct _list));
+  head = (List *)malloc(sizeof(List));
 
   // Terminate if memory not allocated
   if (head == NULL) {

@@ -3,6 +3,11 @@
     "cmath": "c",
     "*.tcc": "c",
     "limits": "c",
-    "type_traits": "c"
+    "type_traits": "c",
+    "cstdarg": "c",
+    "cstdio": "c",
+    "cstdlib": "c",
+    "cstdint": "c",
+    "typeinfo": "c"
   }
 }
