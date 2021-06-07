@@ -54,11 +54,10 @@ void main() {
   for (int i = 0; i < strlen(str); i++) {
     char curChar = *(str + i);
 
-    if (isVowel(curChar)) {
+    if (isVowel(curChar))
       pop();
-    } else {
+    else
       push(curChar);
-    }
 
     if (top == NULL) continue;
 
