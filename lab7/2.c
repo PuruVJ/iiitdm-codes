@@ -9,28 +9,31 @@ typedef struct Node {
 
 typedef struct Stack {
   Node *Top;
-  int size;
 } Stack;
 
 typedef struct Queue {
   Node *front;
   Node *rear;
-  int Max_Size;
-  int size;
 } Queue;
 
 /** Core Functions defined here */
+int stackSize = 0;
 
-void initializeStack(Stack *stack) {
+int queueSize;
+int queueMaxSize;
+
+void createStack(Stack *stack) {
   stack->Top = NULL;
-  stack->size = 0;
+
+  stackSize = 0;
 }
 
-void initializeQueue(Queue *queue, int max) {
+void createQueue(Queue *queue, int max) {
   queue->front = NULL;
   queue->rear = NULL;
-  queue->size = 0L;
-  queue->Max_Size = max;
+
+  queueMaxSize = max;
+  queueSize = 0;
 }
 
 void freeStack(Stack *stack) {
@@ -48,9 +51,8 @@ void freeQueue(Queue *queue) {
   while (queue->front != NULL) {
     temp = queue->front;
 
-    if (queue->front == queue->rear) {
-      queue->rear = NULL;
-    }
+    if (queue->front == queue->rear) queue->rear = NULL;
+
     queue->front = queue->front->next;
 
     free(temp);
@@ -58,41 +60,33 @@ void freeQueue(Queue *queue) {
 }
 
 Node *peekStack(Stack *stack) {
-  if (stack->size == 0) {
-    return NULL;
-  }
+  if (stackSize == 0) return NULL;
 
-  else {
-    return stack->Top;
-  }
+  return stack->Top;
 }
 
 Node *peekQueue(Queue *queue) {
-  if (queue->size == 0) {
-    return NULL;
-  }
+  if (queueSize == 0) return NULL;
 
-  else {
-    return queue->front;
-  }
+  return queue->front;
 }
 
 void push(Stack *stack, int data) {
-  Node *new_tray;
+  Node *temp = malloc(sizeof(Node));
 
-  new_tray = (Node *)malloc(sizeof(Node));
-  if (new_tray == NULL) {
+  if (temp == NULL) {
     printf("\nOut of Memory! Program Exit!\n");
     freeStack(stack);
     exit(0);
   }
-  new_tray->data = data;
-  new_tray->next = stack->Top;
 
-  stack->size++;
+  temp->data = data;
+  temp->next = stack->Top;
 
-  new_tray->key = stack->size;
-  stack->Top = new_tray;
+  stackSize++;
+
+  temp->key = stackSize;
+  stack->Top = temp;
 }
 
 int pop(Stack *stack) {
@@ -103,23 +97,19 @@ int pop(Stack *stack) {
     exit(0);
   }
 
-  int rtr;
-
-  rtr = stack->Top->data;
+  int carID = stack->Top->data;
 
   temp = stack->Top;
   stack->Top = stack->Top->next;
-  stack->size--;
+  stackSize--;
 
   free(temp);
 
-  return rtr;
+  return carID;
 }
 
 void enqueue(Queue *queue, int d) {
-  Node *temp;
-
-  temp = (Node *)malloc(sizeof(Node));
+  Node *temp = malloc(sizeof(Node));
 
   if (temp == NULL) {
     printf("Insufficient Memory! Program Terminated!");
@@ -127,7 +117,7 @@ void enqueue(Queue *queue, int d) {
     exit(0);
   }
 
-  if (queue->size == queue->Max_Size) {
+  if (queueSize == queueMaxSize) {
     printf("Parking Lot FULL!");
     return;
   }
@@ -135,16 +125,14 @@ void enqueue(Queue *queue, int d) {
   temp->data = d;
   temp->next = NULL;
 
-  queue->size = (queue->size) + 1;
+  queueSize = (queueSize) + 1;
 
-  temp->key = queue->size;
+  temp->key = queueSize;
 
   if (queue->rear == NULL) {
     queue->front = temp;
     queue->rear = temp;
-  }
-
-  else {
+  } else {
     queue->rear->next = temp;
     queue->rear = temp;
   }
@@ -158,23 +146,21 @@ int dequeue(Queue *queue) {
     return -1;
   }
 
-  int rtr;
-  rtr = queue->front->data;
-  queue->size -= 1;
+  int carID;
+  carID = queue->front->data;
+  queueSize -= 1;
   temp = queue->front;
 
-  if (queue->front == queue->rear) {
-    queue->rear = NULL;
-  }
+  if (queue->front == queue->rear) queue->rear = NULL;
 
   queue->front = queue->front->next;
 
   free(temp);
 
-  return rtr;
+  return carID;
 }
 
-/** Our program related functions here */
+/** Parking lot related functions here */
 
 void addCarToFront(Queue *queue, int k, int d) {
   Node *temp = malloc(sizeof(Node));
@@ -185,7 +171,7 @@ void addCarToFront(Queue *queue, int k, int d) {
     exit(0);
   }
 
-  if (queue->size == queue->Max_Size) {
+  if (queueSize == queueMaxSize) {
     printf("\nParking Lot FULL!\n");
     return;
   }
@@ -193,7 +179,7 @@ void addCarToFront(Queue *queue, int k, int d) {
   temp->key = k;
   temp->data = d;
 
-  queue->size = (queue->size) + 1;
+  queueSize = (queueSize) + 1;
 
   if (queue->front == NULL) {
     temp->next = NULL;
@@ -206,11 +192,11 @@ void addCarToFront(Queue *queue, int k, int d) {
 }
 
 void removeCarFromQueue(Queue *queue, int k) {
-  if (k > queue->size) return;
+  if (k > queueSize) return;
 
   Stack temp;
 
-  initializeStack(&temp);
+  createStack(&temp);
 
   k--;
 
@@ -229,7 +215,7 @@ void removeCarFromQueue(Queue *queue, int k) {
 
 void printCarQueue(Queue *queue) {
   for (Node *ptr = queue->front; ptr != NULL; ptr = ptr->next)
-    printf(" %d [%d] ", ptr->data, ptr->key);
+    printf(" %d ", ptr->data);
 }
 
 void main() {
@@ -241,16 +227,17 @@ void main() {
   scanf("%d", &max);
 
   printf("\n\n");
-  initializeQueue(&queue, max);
+  createQueue(&queue, max);
 
   int data;
   char choice = '1';
   int k;
 
   printf("Select one of the following :\n\n");
-  printf("\n1. Press 'e' to enter a new car to the Parking from the REAR end.");
+  printf("\n1. Press 'e' to enter a new car in the Parking from rear");
   printf(
-      "\n2. Press 'l' to leave a new car from the Parking from the FRONT end.");
+      "\n2. Press 'l' to remove a new car from the Parking from the FRONT "
+      "end.");
   printf("\n3. Press 's' to show the cars currently present in the Parking.");
   printf(
       "\n4. Press 'r' to Remove a car from a given Location (K) in the "
@@ -258,7 +245,7 @@ void main() {
   printf("\n5. Press 'q' to Quit.\n\n");
 
   while (!(choice == 'q' || choice == 'Q')) {
-    printf("\n\nEnter Your Choice:- ");
+    printf("\nEnter Your Choice:- ");
     scanf(" %c", &choice);
 
     if (choice == 'e' || choice == 'E') {
