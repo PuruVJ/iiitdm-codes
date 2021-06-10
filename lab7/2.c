@@ -192,7 +192,10 @@ void addCarToFront(Queue *queue, int k, int d) {
 }
 
 void removeCarFromQueue(Queue *queue, int k) {
-  if (k > queueSize) return;
+  if (k > queueSize) {
+    printf("Enter a number less than or equal to %d", queueSize);
+    return;
+  };
 
   Stack temp;
 

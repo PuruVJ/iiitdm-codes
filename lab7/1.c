@@ -68,17 +68,10 @@ void main() {
       printf("Enter the element which is to be inserted: ");
       scanf("%d", &val);
       enqueue(val);
-      continue;
     }
 
-    if (choice == 2) {
-      dequeue();
-      continue;
-    }
+    if (choice == 2) dequeue();
 
-    if (choice == 3) {
-      display();
-      continue;
-    }
+    if (choice == 3) display();
   }
 }
