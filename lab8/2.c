@@ -32,7 +32,7 @@ void enqueue(Node* node) {
   rear->next = NULL;
 }
 
-Node* deque() {
+Node* dequeue() {
   if (front == NULL) {
     printf("underflow");
     exit(0);
@@ -55,7 +55,7 @@ Node* create(Node* node) {
   enqueue(node);
 
   while (i < 26) {
-    node = deque();
+    node = dequeue();
     node->left = NULL;
     node->right = NULL;
 
