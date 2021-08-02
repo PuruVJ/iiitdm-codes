@@ -15,10 +15,10 @@ typedef struct _Node {
 
   struct _Node* left;
   struct _Node* right;
-} Node;
+} TreeNode;
 
-Node* newNode(int data) {
-  Node* node = malloc(sizeof(Node));
+TreeNode* node(int data) {
+  TreeNode* node = malloc(sizeof(TreeNode));
 
   if (node == NULL) {
     printf("Insufficient Memory. Exiting program");
@@ -33,12 +33,12 @@ Node* newNode(int data) {
   return node;
 }
 
-Node* createTree(Node* root, int height) {
-  Node* temp = root;
+TreeNode* createTree(TreeNode* root, int height) {
+  TreeNode* temp = root;
 
-  root = newNode(rand() % 100);
-  root->left = newNode(rand() % 100);
-  root->right = newNode(rand() % 100);
+  root = node(rand() % 100);
+  root->left = node(rand() % 100);
+  root->right = node(rand() % 100);
 
   temp = root->left;
   root->left = temp;
@@ -46,8 +46,8 @@ Node* createTree(Node* root, int height) {
   for (int i = 1; i < height; i++) {
     temp->data = rand() % 100;
 
-    temp->left = newNode(rand() % 100);
-    temp->right = newNode(rand() % 100);
+    temp->left = node(rand() % 100);
+    temp->right = node(rand() % 100);
 
     temp = temp->left;
   }
@@ -55,7 +55,7 @@ Node* createTree(Node* root, int height) {
   return root;
 }
 
-void printPostOrder(Node* node) {
+void printPostOrder(TreeNode* node) {
   if (node == NULL) return;
 
   // First on left
@@ -72,7 +72,7 @@ void printPostOrder(Node* node) {
   n++, numbersIndex++;
 }
 
-void printInOrder(Node* node) {
+void printInOrder(TreeNode* node) {
   if (node == NULL) return;
 
   // Left
@@ -85,7 +85,7 @@ void printInOrder(Node* node) {
   printInOrder(node->right);
 }
 
-void printPreOrder(Node* node) {
+void printPreOrder(TreeNode* node) {
   if (node == NULL) return;
 
   // Print current node (root)
@@ -121,7 +121,7 @@ void main() {
 
   srand(time(NULL));
 
-  Node* root;
+  TreeNode* root;
   root = createTree(root, height);
 
   printf("Preorder: ");

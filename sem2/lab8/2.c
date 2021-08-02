@@ -84,7 +84,7 @@ Node* create(Node* node) {
 void preorder(struct node* root) {
   if (root == 0) return;
 
-  printf(" %c ", root->data);
+  printf("%c ", root->data);
   preorder(root->left);
   preorder(root->right);
 }
@@ -93,7 +93,7 @@ void inorder(struct node* root) {
   if (root == 0) return;
 
   inorder(root->left);
-  printf(" %c ", root->data);
+  printf("%c ", root->data);
 
   inorder(root->right);
 }
@@ -103,7 +103,7 @@ void postorder(struct node* root) {
 
   postorder(root->left);
   postorder(root->right);
-  printf(" %c ", root->data);
+  printf("%c ", root->data);
 }
 
 int main() {

@@ -1,0 +1,124 @@
+<button onclick="newTab()">New tab</button> <br /><br /><br />
+<button onclick="focusNextTab()">Focus Next Tab</button>
+<button onclick="focusPrevTab()">Focus Previous Tab</button>
+<br /><br /><br />
+<button onclick="closeTab()">Close Current Tab</button>
+<button onclick="tabs.closeAlltabs();alert('All tabs closed')">Close All Tabs</button>
+<br /><br /><br />
+<button onclick="displayAllTabs()">Display all tabs</button>
+<button onclick="displayCurrentTab()">Display current tabs</button>
+
+<script>
+  /**
+   * @typedef {{url: string; title: string}} Tab
+   */
+
+  // @ts-check
+  class TabQueue {
+    /** @type {Tab[]} */
+    elements = [];
+    #focusedIndex = -1;
+
+    currentFocusedTab() {
+      if (this.#isEmpty()) return null;
+      return this.elements[this.#focusedIndex];
+    }
+
+    focusNextTab() {
+      if (this.#isEmpty()) return null;
+      return this.elements[(this.#focusedIndex = ++this.#focusedIndex % this.elements.length)];
+    }
+
+    focusPrevTab() {
+      if (this.#isEmpty()) return null;
+      return this.elements[
+        (this.#focusedIndex = (--this.#focusedIndex + this.elements.length) % this.elements.length)
+      ];
+    }
+
+    #isEmpty() {
+      return this.elements.length === 0;
+    }
+
+    /** @param {Tab} element*/
+    newTab(element) {
+      this.elements = [...this.elements, element];
+      this.#focusedIndex = this.elements.length - 1;
+    }
+
+    closeCurrentTab() {
+      if (this.#isEmpty()) return null;
+
+      this.elements[this.#focusedIndex] = null;
+
+      if (this.#focusedIndex === this.elements.length - 1) this.#focusedIndex--;
+
+      this.elements = this.elements.filter(Boolean);
+
+      if (this.#isEmpty()) {
+        this.#focusedIndex = -1;
+        return null;
+      }
+
+      return this.elements[this.#focusedIndex];
+    }
+
+    closeAlltabs() {
+      this.elements = [];
+      this.#focusedIndex = -1;
+    }
+  }
+
+  const tabs = new TabQueue();
+
+  function newTab() {
+    const title = prompt("Enter tab title");
+    const url = prompt("Enter Tab URl");
+
+    tabs.newTab({ url, title });
+
+    alert("Successfully added a new tab");
+  }
+
+  function focusNextTab() {
+    const tab = tabs.focusNextTab();
+
+    if (tab === null) return alert("No tabs. Create more tabs");
+
+    alert(`Tab title: ${tab.title} | Tab URl: ${tab.url}`);
+  }
+
+  function focusPrevTab() {
+    const tab = tabs.focusPrevTab();
+
+    if (tab === null) return alert("No tabs. Create more tabs");
+
+    alert(`Tab title: ${tab.title} | Tab URl: ${tab.url}`);
+  }
+
+  function closeTab() {
+    if (tabs.elements.length === 0) return alert("No tabs to close. Create tabs");
+
+    const tab = tabs.closeCurrentTab();
+
+    alert(`Tab closed successfully`);
+  }
+
+  function displayAllTabs() {
+    if (tabs.elements.length === 0) return alert("No tabs. Create tabs");
+
+    const tabsStr = tabs.elements
+      .map(({ title, url }) => `Title: ${title} | URL: ${url}`)
+      .join("\n");
+
+    alert(tabsStr);
+  }
+
+  function displayCurrentTab() {
+    const tab = tabs.currentFocusedTab();
+
+    if (tab == null) return alert("No tabs. Create tabs!");
+
+    alert(`Title: ${tab.title} | URl: ${tab.url}`);
+  }
+</script>
