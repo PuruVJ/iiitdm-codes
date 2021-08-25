@@ -22,6 +22,18 @@
     "shared_mutex": "cpp",
     "streambuf": "cpp",
     "thread": "cpp",
-    "queue": "cpp"
+    "queue": "cpp",
+    "unordered_map": "cpp",
+    "unordered_set": "cpp",
+    "array": "cpp",
+    "string": "cpp",
+    "vector": "cpp",
+    "string_view": "cpp",
+    "functional": "cpp",
+    "iomanip": "cpp",
+    "ostream": "cpp",
+    "ratio": "cpp",
+    "sstream": "cpp",
+    "regex": "cpp"
   }
 }

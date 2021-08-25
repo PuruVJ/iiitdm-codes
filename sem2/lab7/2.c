@@ -3,7 +3,7 @@
 
 typedef struct Node {
   int key;
-  int data;
+  int number;
   struct Node *next;
 } Node;
 
@@ -80,7 +80,7 @@ void push(Stack *stack, int data) {
     exit(0);
   }
 
-  temp->data = data;
+  temp->number = data;
   temp->next = stack->Top;
 
   stackSize++;
@@ -97,7 +97,7 @@ int pop(Stack *stack) {
     exit(0);
   }
 
-  int carID = stack->Top->data;
+  int carID = stack->Top->number;
 
   temp = stack->Top;
   stack->Top = stack->Top->next;
@@ -122,7 +122,7 @@ void enqueue(Queue *queue, int d) {
     return;
   }
 
-  temp->data = d;
+  temp->number = d;
   temp->next = NULL;
 
   queueSize = (queueSize) + 1;
@@ -147,7 +147,7 @@ int dequeue(Queue *queue) {
   }
 
   int carID;
-  carID = queue->front->data;
+  carID = queue->front->number;
   queueSize -= 1;
   temp = queue->front;
 
@@ -177,7 +177,7 @@ void addCarToFront(Queue *queue, int k, int d) {
   }
 
   temp->key = k;
-  temp->data = d;
+  temp->number = d;
 
   queueSize = (queueSize) + 1;
 
@@ -218,7 +218,7 @@ void removeCarFromQueue(Queue *queue, int k) {
 
 void printCarQueue(Queue *queue) {
   for (Node *ptr = queue->front; ptr != NULL; ptr = ptr->next)
-    printf(" %d ", ptr->data);
+    printf(" %d ", ptr->number);
 }
 
 void main() {
