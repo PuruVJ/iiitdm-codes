@@ -34,6 +34,7 @@
     "ostream": "cpp",
     "ratio": "cpp",
     "sstream": "cpp",
-    "regex": "cpp"
+    "regex": "cpp",
+    "iostream": "cpp"
   }
 }
