@@ -109,25 +109,25 @@ class CheckingAccount : public Account {
   }
 };
 
-// Linked list stuff
-class SavingsNode {
- public:
-  SavingsAccount account;
-  SavingsNode* next;
+// // Linked list stuff
+// class SavingsNode {
+//  public:
+//   SavingsAccount account;
+//   SavingsNode* next;
 
-  SavingsNode() {}
+//   SavingsNode() {}
 
-  SavingsNode(SavingsAccount acc) {
-    this->account = acc;
-    this->next = NULL;
-  }
-};
+//   SavingsNode(SavingsAccount acc) {
+//     this->account = acc;
+//     this->next = NULL;
+//   }
+// };
 
-class CheckingNode {
- public:
-  CheckingAccount account;
-  CheckingNode* next;
-};
+// class CheckingNode {
+//  public:
+//   CheckingAccount account;
+//   CheckingNode* next;
+// };
 
 int main() {
   cout << "1. Open Account (Savings or Checking Account)\n";
